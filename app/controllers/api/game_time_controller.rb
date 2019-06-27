@@ -11,7 +11,19 @@ class Api::GameTimeController < ApplicationController
     render 'name.json.jb'
   end
 
-  # def number
-  #   if param["number"] == rand(1..100)
-  # end
+  def number
+    the_guess = params["number"].to_i
+    if the_guess == 32
+      @response = "you win!"
+    elsif the_guess < 32
+      @response = "too low"
+    elsif the_guess > 32
+      @response = "too high"
+    end
+  end
+
+  def segment_method
+    @name = params["name"]
+    render 'segment.json.jb'
+  end
 end
