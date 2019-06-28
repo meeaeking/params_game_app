@@ -26,4 +26,25 @@ class Api::GameTimeController < ApplicationController
     @name = params["name"]
     render 'segment.json.jb'
   end
+
+  def body_method
+    the_guess = params["number"].to_i
+    if the_guess == 32
+      @response = "you win!"
+    elsif the_guess < 32
+      @response = "too low"
+    elsif the_guess > 32
+      @response = "too high"
+    end
+    render 'body.json.jb'
+  end
+
+  def authentication_method
+    if params[:password] == 'swordfish' && params[:username] =='hugh'
+      @message = "valid credentials"
+    else
+      @message = "invalid credentials"
+    end
+    render 'authentication.json.jb'
+  end
 end
